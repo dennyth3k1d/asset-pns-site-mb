@@ -22,7 +22,7 @@ android {
         targetSdk 34
         versionCode 1
         versionName "1.0"
-        buildConfigField 'String', 'FIREBASE_EMAIL', prop.getProperty("firebase.email")
+        buildConfigField 'String', 'FIREBASE_EMAIL', prop.getProperty("firebase.username")
         buildConfigField 'String', 'FIREBASE_PASSWORD', prop.getProperty("firebase.password")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
