@@ -7,6 +7,8 @@ plugins {
 }
 
 android {
+    def prop = new Properties()
+    project.rootProject.file("local.properties").withInputStream { stream -> prop.load(stream)}
     namespace 'com.deni.assetpnssite'
     compileSdk 34
     buildFeatures{
@@ -20,7 +22,8 @@ android {
         targetSdk 34
         versionCode 1
         versionName "1.0"
-
+        buildConfigField 'String', 'FIREBASE_EMAIL', prop.getProperty("firebase.email")
+        buildConfigField 'String', 'FIREBASE_PASSWORD', prop.getProperty("firebase.password")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -40,6 +43,7 @@ android {
 }
 
 dependencies {
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3'
     implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'

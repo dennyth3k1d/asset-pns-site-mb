@@ -9,6 +9,12 @@ class LoginUsecase {
     fun login(username: Editable?, password: Editable?) =
         flow {
             val firestore = Firebase.firestore
-
+            val snapshot = firestore.collection("user").get().await()
+                val user = snapshot?.documents?.find {
+                    it?.getString("username") == username?.toString()
+                }
+                require(user ! = null) { "user tidak ditemukan"}
+                val pass = user.getString("password")
+                require(pass == password?.toString()) { "kata sandi salah"}
         }
 }
