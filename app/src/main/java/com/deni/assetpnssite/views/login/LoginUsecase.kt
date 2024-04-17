@@ -1,5 +1,6 @@
 package com.deni.assetpnssite.views.login
 
+import kotlinx.coroutines.tasks.await
 import android.text.Editable
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
@@ -13,8 +14,9 @@ class LoginUsecase {
                 val user = snapshot?.documents?.find {
                     it?.getString("username") == username?.toString()
                 }
-                require(user ! = null) { "user tidak ditemukan"}
+                require(user != null) { "user tidak ditemukan"}
                 val pass = user.getString("password")
                 require(pass == password?.toString()) { "kata sandi salah"}
+                emit(true)
         }
 }
